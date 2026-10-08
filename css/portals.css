@@ -1,5 +1,7 @@
 /* =============================================================================
-   AUTHENTICATION & PORTAL DASHBOARD STYLES
+   EUROGRIP TYRE+ | SEPARATE PORTALS ARCHITECTURE
+   1. Admin Enterprise Operations Command Console (Dark Industrial / Telemetry)
+   2. Rider Virtual Cockpit & Digital Garage (High-Octane Neon Automotive Companion)
    ============================================================================= */
 
 /* NAVBAR USER STATUS PILL */
@@ -99,43 +101,84 @@
 }
 .auth-role-tabs {
   display: flex;
-  gap: 8px;
-  margin: 18px 0 16px;
-  background: var(--panel);
-  padding: 4px;
-  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--panel-border);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  margin-bottom: 22px;
+  gap: 4px;
 }
 .auth-role-tab {
   flex: 1;
   background: transparent;
   border: none;
   color: var(--mute);
-  padding: 8px 12px;
+  padding: 10px 8px;
   border-radius: 6px;
+  font-size: 0.88rem;
   font-weight: 700;
-  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 .auth-role-tab:hover {
   color: var(--ink);
 }
 .auth-role-tab.active {
   background: var(--panel-elevated);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.auth-role-tab[data-auth-tab="admin"].active {
   color: var(--amber);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255, 179, 0, 0.3);
 }
-.auth-role-tab[data-role="admin"].active {
-  color: #FFA726;
+.auth-role-tab[data-auth-tab="user"].active {
+  color: var(--cyan);
+  border: 1px solid rgba(0, 210, 255, 0.3);
 }
-.auth-demo-bar {
-  background: rgba(255, 179, 0, 0.08);
-  border: 1px dashed rgba(255, 179, 0, 0.3);
+.auth-role-tab[data-auth-tab="register"].active {
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.auth-notice-box {
+  background: rgba(0, 210, 255, 0.08);
+  border: 1px solid rgba(0, 210, 255, 0.2);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  margin-bottom: 16px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  font-size: 0.82rem;
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.auth-form input,
+.auth-form select {
+  width: 100%;
+  padding: 10px 14px;
+  background: #0E1318;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-size: 0.92rem;
+  margin-top: 4px;
+  transition: border-color 0.2s ease;
+}
+.auth-form input:focus,
+.auth-form select:focus {
+  outline: none;
+  border-color: var(--amber);
+}
+.quick-creds-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px dashed var(--panel-border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-top: 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -158,91 +201,33 @@
   color: #000;
 }
 
-/* PORTAL DASHBOARD SECTION */
+/* PORTAL CONTAINER */
 .portal-section {
   padding: 40px 0 70px;
   border-top: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(22, 28, 36, 0.4) 0%, transparent 100%);
-}
-.portal-header-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 28px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--panel-border);
-}
-.admin-kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
-}
-@media (max-width: 900px) {
-  .admin-kpi-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 500px) {
-  .admin-kpi-grid { grid-template-columns: 1fr; }
-}
-.admin-kpi-card {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-md);
-  padding: 18px;
-  position: relative;
-  overflow: hidden;
-}
-.admin-kpi-card:before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--amber);
-}
-.admin-kpi-card.cyan:before { background: var(--cyan); }
-.admin-kpi-card.success:before { background: var(--success); }
-.admin-kpi-val {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 2.3rem;
-  font-weight: 800;
-  line-height: 1;
-  color: var(--amber);
-  margin: 6px 0 2px;
-}
-.admin-kpi-card.cyan .admin-kpi-val { color: var(--cyan); }
-.admin-kpi-card.success .admin-kpi-val { color: var(--success); }
-.admin-action-box {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-md);
-  padding: 22px;
-  margin-bottom: 24px;
-}
-.table-filter-input {
-  max-width: 280px;
-  padding: 8px 12px;
-  font-size: 0.88rem;
 }
 
-/* ==========================================================================
-   ADMIN CONSOLE: ENTERPRISE TELEMETRY & COMMAND CENTER STYLING
-   ========================================================================== */
+/* =============================================================================
+   1. ADMIN CONSOLE: INDUSTRIAL COMMAND DECK STYLING
+   ============================================================================= */
 .admin-console-wrap {
-  background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.08) 0%, rgba(14, 19, 24, 0.98) 70%);
-  border: 1px solid rgba(0, 210, 255, 0.25);
+  background: #090D14;
+  background-image: 
+    radial-gradient(rgba(255, 179, 0, 0.06) 1px, transparent 0),
+    linear-gradient(180deg, rgba(14, 20, 29, 0.95) 0%, rgba(9, 13, 20, 0.98) 100%);
+  background-size: 24px 24px, 100% 100%;
+  border: 1px solid rgba(255, 179, 0, 0.35);
   border-radius: var(--radius-lg);
   padding: 28px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 25px 75px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   position: relative;
 }
 .admin-console-wrap:before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #00D2FF 0%, #FFB300 50%, #10B981 100%);
+  height: 4px;
+  background: linear-gradient(90deg, #FF9800 0%, #FFB300 40%, #10B981 100%);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 .admin-top-bar {
@@ -251,21 +236,21 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 22px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 179, 0, 0.15);
 }
 .admin-badge-live {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
   color: #10B981;
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 5px 12px;
+  padding: 4px 12px;
   border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -275,127 +260,187 @@
   border-radius: 50%;
   background: #10B981;
   box-shadow: 0 0 10px #10B981;
-  animation: pulseLive 1.8s infinite;
+  animation: pulseDot 1.4s infinite;
 }
-@keyframes pulseLive {
+@keyframes pulseDot {
   0% { transform: scale(0.9); opacity: 0.7; }
   50% { transform: scale(1.3); opacity: 1; }
   100% { transform: scale(0.9); opacity: 0.7; }
 }
-
-/* Admin Internal Sub-Tabs */
-.admin-tabs-nav {
-  display: flex;
-  gap: 8px;
-  background: rgba(0, 0, 0, 0.35);
-  padding: 6px;
+.admin-role-switch-btn {
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid rgba(0, 210, 255, 0.3);
+  color: var(--cyan);
+  padding: 6px 14px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  margin-bottom: 24px;
-  overflow-x: auto;
-}
-.admin-tab-btn {
-  background: transparent;
-  border: none;
-  color: var(--mute);
-  padding: 10px 18px;
-  border-radius: 6px;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  white-space: nowrap;
-  font-family: inherit;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 6px;
+}
+.admin-role-switch-btn:hover {
+  background: rgba(0, 210, 255, 0.2);
+  transform: translateY(-1px);
+}
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+@media (max-width: 1024px) {
+  .admin-stats-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .admin-stats-grid { grid-template-columns: 1fr; }
+}
+.admin-stat-card {
+  background: rgba(18, 24, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 3px solid var(--amber);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.admin-stat-label {
+  font-size: 0.78rem;
+  color: var(--mute);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.admin-stat-num {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #FFF;
+  margin: 4px 0 2px;
+}
+.admin-stat-num.cyan { color: var(--cyan); }
+.admin-stat-num.amber { color: var(--amber); }
+.admin-stat-num.success { color: var(--success); }
+.admin-stat-sub {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  display: block;
+}
+.admin-subtabs-nav {
+  display: flex;
   gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
-.admin-tab-btn:hover {
+.admin-subtab-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--mute);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.admin-subtab-btn:hover {
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 179, 0, 0.3);
 }
-.admin-tab-btn.active {
-  background: rgba(0, 210, 255, 0.15);
-  color: var(--cyan);
-  border: 1px solid rgba(0, 210, 255, 0.3);
+.admin-subtab-btn.active {
+  background: rgba(255, 179, 0, 0.15);
+  border-color: var(--amber);
+  color: var(--amber);
 }
-
-/* Filter bar & table for Admin Ledger */
 .admin-ledger-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 12px 16px;
   border-radius: var(--radius-sm);
-  margin-bottom: 16px;
+  padding: 12px 16px;
 }
-.admin-filter-group {
+.ledger-search-box {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+  min-width: 240px;
 }
-
-/* Batch Minting UI */
-.batch-mint-card {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px dashed rgba(0, 210, 255, 0.3);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  margin-top: 20px;
+.ledger-search-box input {
+  width: 100%;
+  background: #0E1318;
+  border: 1px solid var(--panel-border);
+  color: #FFF;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
 }
-.batch-serials-list {
-  background: #090D11;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.ledger-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ledger-filter-group select {
+  background: #0E1318;
+  border: 1px solid var(--panel-border);
+  color: #FFF;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+.mint-terminal-display {
+  background: #05070A;
+  border: 1px solid rgba(0, 210, 255, 0.25);
   border-radius: var(--radius-sm);
   padding: 14px;
-  font-family: monospace;
-  font-size: 0.85rem;
-  max-height: 220px;
-  overflow-y: auto;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.82rem;
   color: var(--cyan);
+  line-height: 1.5;
+  max-height: 260px;
+  overflow-y: auto;
+  white-space: pre-wrap;
 }
-
-/* Admin Partner Garage Cards */
-.admin-garage-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
-}
-.admin-garage-card {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
+.garage-admin-card {
+  background: rgba(18, 24, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  padding: 18px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  padding: 16px;
+  transition: all 0.2s ease;
 }
-.admin-garage-card:hover {
+.garage-admin-card:hover {
+  border-color: var(--amber);
   transform: translateY(-2px);
-  border-color: var(--cyan);
 }
 
-/* ==========================================================================
-   USER PORTAL: RIDER VIRTUAL COCKPIT & GARAGE STYLING
-   ========================================================================== */
+/* =============================================================================
+   2. RIDER VIRTUAL COCKPIT: HIGH-OCTANE AUTOMOTIVE COMPANION
+   ============================================================================= */
 .rider-garage-wrap {
-  background: radial-gradient(circle at top left, rgba(255, 179, 0, 0.08) 0%, rgba(18, 23, 30, 0.98) 75%);
-  border: 1px solid rgba(255, 179, 0, 0.28);
+  background: radial-gradient(circle at 85% 15%, rgba(0, 229, 255, 0.12) 0%, rgba(13, 19, 32, 0.98) 60%),
+              linear-gradient(135deg, #090E1A 0%, #060911 100%);
+  border: 1px solid rgba(0, 229, 255, 0.35);
   border-radius: var(--radius-lg);
   padding: 30px;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 30px rgba(255, 179, 0, 0.1);
+  box-shadow: 0 25px 75px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 229, 255, 0.12);
   position: relative;
 }
 .rider-garage-wrap:before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--amber) 0%, #FF6B00 60%, var(--cyan) 100%);
+  height: 4px;
+  background: linear-gradient(90deg, #00E5FF 0%, #0088FF 50%, #FFB300 100%);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 .rider-top-bar {
@@ -405,42 +450,72 @@
   flex-wrap: wrap;
   gap: 16px;
   margin-bottom: 24px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+}
+.rider-view-mode-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  padding: 3px 6px;
+}
+.rider-view-mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--mute);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.rider-view-mode-btn.active {
+  background: rgba(0, 229, 255, 0.2);
+  color: var(--cyan);
+}
+.rider-role-switch-btn {
+  background: rgba(255, 179, 0, 0.12);
+  border: 1px solid rgba(255, 179, 0, 0.35);
+  color: var(--amber);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.rider-role-switch-btn:hover {
+  background: rgba(255, 179, 0, 0.25);
+  transform: translateY(-1px);
 }
 
 /* Machine Hero Card */
 .rider-machine-hero {
-  background: linear-gradient(135deg, rgba(25, 33, 44, 0.9) 0%, rgba(15, 20, 27, 0.95) 100%);
-  border: 1px solid rgba(255, 179, 0, 0.25);
+  background: linear-gradient(135deg, rgba(16, 25, 42, 0.95) 0%, rgba(10, 15, 26, 0.98) 100%);
+  border: 1px solid rgba(0, 229, 255, 0.25);
   border-radius: var(--radius-md);
   padding: 24px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-.rider-machine-hero:after {
-  content: "EUROGRIP TYRE+";
-  position: absolute;
-  right: -10px;
-  bottom: -15px;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 5rem;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.02);
-  pointer-events: none;
-  white-space: nowrap;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 .machine-header-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 .machine-name-title {
-  font-size: 1.85rem;
+  font-size: 2.1rem;
   font-family: "Barlow Condensed", sans-serif;
   font-weight: 800;
   color: #FFF;
@@ -448,15 +523,44 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  letter-spacing: 0.02em;
+}
+
+/* Radial Tread Life & Health Dial */
+.tread-dial-container {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-top: 18px;
+}
+.tread-dial-svg-box {
+  width: 76px;
+  height: 76px;
+  position: relative;
+  flex-shrink: 0;
+}
+.tread-dial-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--success);
 }
 
 /* Interactive Cold Pressure Calculator */
 .pressure-calculator-box {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(0, 210, 255, 0.2);
+  background: rgba(10, 15, 24, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.25);
   border-radius: var(--radius-md);
   padding: 22px;
-  margin-top: 20px;
   box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 .pressure-modes-bar {
@@ -465,10 +569,8 @@
   gap: 8px;
   margin: 14px 0 18px;
 }
-@media (max-width: 768px) {
-  .pressure-modes-bar {
-    grid-template-columns: 1fr 1fr;
-  }
+@media (max-width: 640px) {
+  .pressure-modes-bar { grid-template-columns: 1fr 1fr; }
 }
 .pressure-mode-btn {
   background: rgba(255, 255, 255, 0.04);
@@ -488,218 +590,165 @@
   border-color: var(--cyan);
 }
 .pressure-mode-btn.active {
-  background: rgba(0, 210, 255, 0.15);
+  background: rgba(0, 229, 255, 0.18);
   color: var(--cyan);
   border-color: var(--cyan);
-  box-shadow: 0 0 16px rgba(0, 210, 255, 0.25);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
 }
-
-/* Gauge Displays Row */
 .gauges-display-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  margin-top: 14px;
 }
 .digital-gauge-box {
-  background: #0B0F14;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-sm);
-  padding: 14px 18px;
+  background: radial-gradient(circle at center, rgba(0, 229, 255, 0.1) 0%, rgba(13, 19, 28, 0.95) 75%);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: var(--radius-md);
+  padding: 16px;
   text-align: center;
-  position: relative;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+.digital-gauge-box.rear {
+  background: radial-gradient(circle at center, rgba(255, 179, 0, 0.1) 0%, rgba(13, 19, 28, 0.95) 75%);
+  border-color: rgba(255, 179, 0, 0.35);
 }
 .digital-gauge-label {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   text-transform: uppercase;
   color: var(--mute);
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 .digital-gauge-value {
   font-family: "Barlow Condensed", sans-serif;
-  font-size: 2.8rem;
+  font-size: 3.2rem;
   font-weight: 900;
-  line-height: 1;
   color: var(--cyan);
+  line-height: 1;
   margin: 6px 0;
-  text-shadow: 0 0 20px rgba(0, 210, 255, 0.35);
+  text-shadow: 0 0 18px rgba(0, 229, 255, 0.45);
 }
-.digital-gauge-value.amber {
+.digital-gauge-box.rear .digital-gauge-value {
   color: var(--amber);
-  text-shadow: 0 0 20px rgba(255, 179, 0, 0.35);
+  text-shadow: 0 0 18px rgba(255, 179, 0, 0.45);
 }
 
-/* Hologram Warranty Pass Card */
+/* Hologram Warranty Pass */
 .hologram-warranty-pass {
-  background: linear-gradient(135deg, rgba(255, 179, 0, 0.08) 0%, rgba(20, 27, 36, 0.95) 50%, rgba(0, 210, 255, 0.08) 100%);
-  border: 1px solid var(--amber);
+  background: linear-gradient(135deg, rgba(20, 28, 42, 0.95) 0%, rgba(10, 14, 22, 0.98) 100%);
+  border: 1px solid rgba(255, 179, 0, 0.3);
   border-radius: var(--radius-md);
-  padding: 22px;
+  padding: 24px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 179, 0, 0.15);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
 }
 .hologram-seal {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 52px;
-  height: 52px;
+  top: 18px;
+  right: 18px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--amber) 0%, #FF6B00 100%);
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  font-size: 0.7rem;
+  background: radial-gradient(circle at 30% 30%, #FFE082, #FFB300 60%, #E65100 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: #000;
-  text-align: center;
-  line-height: 1.1;
-  box-shadow: 0 0 15px var(--amber-glow);
-  transform: rotate(-12deg);
-}
-
-/* Service Booking Modal / Form */
-.service-booking-card {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  margin-top: 20px;
+  font-weight: 900;
+  font-size: 0.65rem;
+  line-height: 1;
+  box-shadow: 0 0 20px rgba(255, 179, 0, 0.5);
+  user-select: none;
 }
 .garage-select-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
-.garage-select-item:hover, .garage-select-item.selected {
-  border-color: var(--amber);
-  background: rgba(255, 179, 0, 0.08);
+.garage-select-item:hover,
+.garage-select-item.selected {
+  background: rgba(0, 229, 255, 0.08);
+  border-color: var(--cyan);
 }
-
-/* ==========================================================================
-   MOBILE-ONLY ACCESS RESTRICTION & SMARTPHONE SIMULATOR FOR RIDER PORTAL
-   ========================================================================== */
-.mobile-only-gate-card {
-  max-width: 620px;
-  margin: 20px auto 40px;
-  background: linear-gradient(155deg, rgba(22, 28, 36, 0.98) 0%, rgba(12, 16, 22, 0.98) 100%);
-  border: 1px solid var(--amber);
-  border-radius: var(--radius-lg);
-  padding: 36px 32px;
-  text-align: center;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 30px var(--amber-glow);
-  position: relative;
-  overflow: hidden;
-}
-.mobile-only-gate-card:before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--amber) 0%, #FF6B00 50%, var(--cyan) 100%);
-}
-.gate-device-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 179, 0, 0.12);
-  border: 1px solid rgba(255, 179, 0, 0.3);
-  color: var(--amber);
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 16px;
-}
-.gate-qr-preview-box {
-  background: #FFFFFF;
-  padding: 12px;
+.rsa-emergency-card {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(20, 10, 10, 0.9) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.35);
   border-radius: var(--radius-md);
-  display: inline-block;
-  margin: 18px 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-.gate-qr-preview-box img {
-  width: 160px;
-  height: 160px;
-  display: block;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-/* DESKTOP SMARTPHONE FRAME SIMULATOR */
+/* SMARTPHONE FRAME SIMULATOR */
 .desktop-phone-simulator-wrap {
-  max-width: 460px;
-  margin: 0 auto 50px;
-  position: relative;
+  max-width: 440px;
+  margin: 0 auto;
 }
 .simulator-control-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #111720;
-  border: 1px solid rgba(0, 210, 255, 0.25);
+  border: 1px solid rgba(0, 229, 255, 0.25);
   border-radius: var(--radius-sm);
   padding: 10px 16px;
   margin-bottom: 14px;
   font-size: 0.82rem;
 }
 .desktop-phone-frame {
-  background: #0D1217;
-  border: 12px solid #1E2632;
-  border-radius: 48px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 210, 255, 0.2);
+  background: #090E16;
+  border: 12px solid #1C2432;
+  border-radius: 46px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 229, 255, 0.2);
   overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 .phone-frame-notch-bar {
-  background: #1E2632;
+  background: #1C2432;
   height: 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 22px;
+  padding: 0 20px;
   font-size: 0.72rem;
   font-weight: 700;
   color: #CBD5E1;
   user-select: none;
 }
 .phone-frame-island {
-  width: 90px;
-  height: 14px;
+  width: 80px;
+  height: 12px;
   background: #000;
   border-radius: 12px;
 }
 .phone-frame-screen-content {
-  max-height: 780px;
+  max-height: 740px;
   overflow-y: auto;
   padding: 16px;
-  background: var(--bg);
+  background: #0A0F1D;
 }
-.phone-frame-screen-content::-webkit-scrollbar {
-  width: 4px;
-}
+.phone-frame-screen-content::-webkit-scrollbar { width: 4px; }
 .phone-frame-screen-content::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
 }
 .phone-frame-home-pill {
-  width: 120px;
+  width: 110px;
   height: 4px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 4px;
-  margin: 12px auto 8px;
+  margin: 10px auto 6px;
 }
-
-
-

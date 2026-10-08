@@ -1,16 +1,17 @@
 /**
  * Eurogrip TYRE+ | Rider Virtual Cockpit & Digital Garage
- * Mobile-exclusive application experience featuring cold pressure telemetry calculator,
- * active motorcycle switcher across 32 models, holographic warranty pass, and garage bookings.
+ * High-octane motorcycle companion featuring live cold pressure telemetry,
+ * 32-motorcycle switcher, radial tread wear dial, holographic warranty pass,
+ * certified garage booking, and 24x7 roadside emergency assistance.
  */
 
 var S_RIDER = {
   pressureMode: "solo", // solo, pillion, monsoon, touring
   selectedGarageId: "GAR-BLR-01",
-  forceMobileSimulator: false
+  viewMode: "cockpit" // "cockpit" (responsive wide) or "simulator" (smartphone frame)
 };
 
-// Device Detection Utility: checks user agent and screen dimensions
+// Device Detection Utility
 function isMobileDevice() {
   var ua = navigator.userAgent || "";
   var isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
@@ -18,13 +19,12 @@ function isMobileDevice() {
   return isMobileUA || isSmallScreen;
 }
 
-function toggleMobileSimulator(enable) {
-  S_RIDER.forceMobileSimulator = !!enable;
+function setRiderViewMode(mode) {
+  S_RIDER.viewMode = mode;
   var content = $("#portalContent");
   if (content && S.currentUser && S.currentUser.role !== "admin") {
     renderUserPortal(content, S.currentUser);
   }
-  toast(enable ? "📱 Mobile Device Simulator Enabled" : "Exited Mobile Simulator");
 }
 
 function copyMobilePortalLink() {
@@ -38,31 +38,6 @@ function copyMobilePortalLink() {
 }
 
 function renderUserPortal(container, user) {
-  // Mobile Access Enforcement: Rider portal is restricted to mobile devices (or interactive simulator on desktop)
-  if (!isMobileDevice() && !S_RIDER.forceMobileSimulator) {
-    container.innerHTML =
-      '<div class="mobile-only-gate-card">' +
-        '<span class="gate-device-badge">📱 Mobile Exclusive Portal</span>' +
-        '<h2 style="font-size:2.3rem;margin:6px 0 2px">Smartphone Access Required</h2>' +
-        '<p class="lead" style="font-size:1rem;color:var(--mute);max-width:540px;margin:10px auto 16px">' +
-          'Eurogrip TYRE+ Rider Cockpit is engineered exclusively for mobile riders on the road. Scan with your smartphone camera to access your digital tyre garage, real-time cold pressure telemetry & 5-year warranty passes.' +
-        '</p>' +
-        '<div class="gate-qr-preview-box">' +
-          '<img src="./images/eurogrip-qr-sample.png" alt="Scan to open on smartphone">' +
-          '<div style="font-size:0.75rem;color:#000;font-weight:700;margin-top:6px">Point Smartphone Camera to Open</div>' +
-        '</div>' +
-        '<div style="margin:8px 0 20px;font-size:0.86rem;color:var(--mute)">' +
-          'Testing or evaluating on a computer? Launch the interactive smartphone frame simulator:' +
-        '</div>' +
-        '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
-          '<button class="btn" onclick="toggleMobileSimulator(true)">📱 Launch Mobile Cockpit Simulator</button>' +
-          '<button class="btn ghost" onclick="copyMobilePortalLink()">📋 Copy Mobile Link</button>' +
-          '<button class="btn ghost" onclick="logoutUser()">Sign Out</button>' +
-        '</div>' +
-      '</div>';
-    return;
-  }
-
   var userBike = user.bike || S.bike || "Royal Enfield Classic 350";
   var bikeMeta = (typeof MOTORCYCLES_CATALOG !== "undefined" && MOTORCYCLES_CATALOG[userBike])
     ? MOTORCYCLES_CATALOG[userBike]
@@ -76,19 +51,11 @@ function renderUserPortal(container, user) {
         soloRearPsi: 32,
         pillionFrontPsi: 30,
         pillionRearPsi: 36,
+        weightKg: 195,
         icon: "👑"
       };
 
   var tyre = S.activeTyre || TYRE_DATABASE[DEFAULT_TYRE_ID];
-  var warranties = getWarrantiesDatabase();
-
-  // Find warranties linked to this rider by clean phone or name
-  var userCleanPhone = cleanPhone(user.phone);
-  var myWarranties = warranties.filter(function(w) {
-    var phoneMatch = userCleanPhone && cleanPhone(w.riderPhone) === userCleanPhone;
-    var nameMatch = w.riderName && w.riderName.toLowerCase() === user.name.toLowerCase();
-    return phoneMatch || nameMatch;
-  });
 
   // Calculate dynamic Cold Pressure based on Mode
   var calcFrontPsi = bikeMeta.soloFrontPsi;
@@ -109,7 +76,7 @@ function renderUserPortal(container, user) {
     modeAdvice = "Stiffened carcass prevents excessive heat buildup during continuous 90+ km/h highway runs.";
   }
 
-  // Generate Motorcycle Selector Options
+  // Generate Motorcycle Selector Options across 32 models
   var bikeOptionsHtml = "";
   if (typeof MOTORCYCLES_CATALOG !== "undefined") {
     var groups = {};
@@ -129,25 +96,30 @@ function renderUserPortal(container, user) {
 
   var html =
     '<div class="rider-garage-wrap">' +
-      '<!-- RIDER COCKPIT HEADER -->' +
+      '<!-- RIDER COCKPIT HEADER WITH SWITCHERS -->' +
       '<div class="rider-top-bar">' +
         '<div>' +
-          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">' +
-            '<span class="tag cyan sm">🏍️ Connected Rider Cockpit</span>' +
-            '<span style="color:var(--success);font-weight:700;font-size:0.85rem">● Warranty Shield Active</span>' +
+          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">' +
+            '<span class="tag cyan sm">🏍️ Connected Rider Virtual Cockpit</span>' +
+            '<span style="color:var(--success);font-weight:700;font-size:0.85rem">● 5-Yr Security Shield Active</span>' +
           '</div>' +
-          '<h2 style="margin:2px 0;font-size:2.4rem">Welcome back, ' + esc(user.name) + '!</h2>' +
+          '<h2 style="margin:2px 0;font-size:2.4rem;color:#FFF">Welcome back, ' + esc(user.name) + '!</h2>' +
           '<p style="margin:0;color:var(--mute);font-size:0.92rem">' +
-            'Primary Credential: <strong>' + esc(user.phone) + '</strong> · City: <strong>' + esc(user.city || "Bengaluru") + '</strong>' +
+            'Primary Phone: <strong style="color:var(--cyan)">' + esc(user.phone) + '</strong> · Garage City: <strong>' + esc(user.city || "Bengaluru") + '</strong>' +
           '</p>' +
         '</div>' +
-        '<div style="display:flex;align-items:center;gap:10px">' +
-          '<button class="btn sm" onclick="openPassportModal()">📱 Digital Tyre Pass</button>' +
+        '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">' +
+          '<div class="rider-view-mode-bar">' +
+            '<button class="rider-view-mode-btn ' + (S_RIDER.viewMode === "cockpit" ? "active" : "") + '" onclick="setRiderViewMode(\'cockpit\')">🖥️ Wide Cockpit</button>' +
+            '<button class="rider-view-mode-btn ' + (S_RIDER.viewMode === "simulator" ? "active" : "") + '" onclick="setRiderViewMode(\'simulator\')">📱 Phone Frame</button>' +
+          '</div>' +
+          '<button class="rider-role-switch-btn" onclick="switchPortalRole(\'admin\')" title="Switch to Admin Console">👑 Switch to Admin Console</button>' +
+          '<button class="btn sm" onclick="openPassportModal()">📱 Digital Passport</button>' +
           '<button class="btn sm ghost" onclick="logoutUser()">Sign Out</button>' +
         '</div>' +
       '</div>' +
 
-      '<!-- HERO MACHINE CARD WITH ACTIVE MOTORCYCLE SWITCHER -->' +
+      '<!-- 1. MY MACHINE HERO CARD & ACTIVE BIKE SWITCHER -->' +
       '<div class="rider-machine-hero">' +
         '<div class="machine-header-row">' +
           '<div>' +
@@ -156,12 +128,12 @@ function renderUserPortal(container, user) {
               '<span>' + (bikeMeta.icon || "🏍️") + '</span> ' + esc(userBike) +
             '</h3>' +
             '<div style="color:var(--mute);font-size:0.88rem;margin-top:4px">' +
-              'Engine: <strong>' + esc(bikeMeta.engine) + '</strong> · Curb Weight: <strong>' + (bikeMeta.weightKg ? bikeMeta.weightKg + " kg" : "180 kg") + '</strong>' +
+              'Engine: <strong>' + esc(bikeMeta.engine) + '</strong> · Curb Weight: <strong>' + (bikeMeta.weightKg ? bikeMeta.weightKg + " kg" : "195 kg") + '</strong>' +
             '</div>' +
           '</div>' +
-          '<div style="min-width:240px">' +
-            '<label style="font-size:0.78rem;color:var(--mute);margin:0 0 4px;display:block">Change Active Motorcycle:</label>' +
-            '<select onchange="changeRiderBike(this.value)" style="padding:8px 12px;font-size:0.85rem;background:#0E1318">' +
+          '<div style="min-width:260px">' +
+            '<label style="font-size:0.78rem;color:var(--mute);margin:0 0 4px;display:block">Switch Active Motorcycle (32 Models):</label>' +
+            '<select onchange="changeRiderBike(this.value)" style="padding:9px 12px;font-size:0.88rem;background:#0A0F1D;border:1px solid rgba(0,229,255,0.3);color:#FFF;border-radius:6px;width:100%">' +
               bikeOptionsHtml +
             '</select>' +
           '</div>' +
@@ -173,69 +145,84 @@ function renderUserPortal(container, user) {
             '<span class="spec-badge-val" style="font-size:1rem;color:var(--amber)">' + tyre.model + '</span>' +
           '</div>' +
           '<div class="spec-badge-item">' +
-            '<span class="spec-badge-label">Front Tyre Spec</span>' +
+            '<span class="spec-badge-label">Front Wheel Spec</span>' +
             '<span class="spec-badge-val" style="font-size:0.95rem;color:var(--cyan)">' + (bikeMeta.frontSize || "100/90-19") + '</span>' +
           '</div>' +
           '<div class="spec-badge-item">' +
-            '<span class="spec-badge-label">Rear Tyre Spec</span>' +
+            '<span class="spec-badge-label">Rear Wheel Spec</span>' +
             '<span class="spec-badge-val" style="font-size:0.95rem;color:var(--amber)">' + (bikeMeta.rearSize || tyre.size) + '</span>' +
           '</div>' +
           '<div class="spec-badge-item">' +
-            '<span class="spec-badge-label">Loyalty Points</span>' +
+            '<span class="spec-badge-label">Loyalty Balance</span>' +
             '<span class="spec-badge-val" style="font-size:1.1rem;color:var(--success)">' + (user.points || S.rider) + ' pts</span>' +
+          '</div>' +
+        '</div>' +
+
+        '<!-- RADIAL TREAD DEPTH & TYRE WEAR DIAL -->' +
+        '<div class="tread-dial-container">' +
+          '<div class="tread-dial-svg-box">' +
+            '<svg viewBox="0 0 36 36" style="width:100%;height:100%">' +
+              '<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3.5" />' +
+              '<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#10B981" stroke-width="3.5" stroke-dasharray="88, 100" stroke-linecap="round" />' +
+            '</svg>' +
+            '<div class="tread-dial-text">88%</div>' +
+          '</div>' +
+          '<div>' +
+            '<strong style="color:#FFF;font-size:1.05rem">Tread Life: Prime Condition (88% Remaining)</strong>' +
+            '<div style="color:var(--mute);font-size:0.85rem;margin-top:2px">' +
+              'Virgin Tread: <strong>' + tyre.treadDepth + '</strong> · Estimated Life: <strong>' + (tyre.lifeEstimate || "32,000 km") + '</strong> · Next Inspection: <strong style="color:var(--amber)">In 90 Days</strong>' +
+            '</div>' +
           '</div>' +
         '</div>' +
       '</div>' +
 
-      '<!-- TWO COLUMN COCKPIT: PRESSURE CALCULATOR & DIGITAL WARRANTY PASS -->' +
+      '<!-- 2. TWO COLUMN COCKPIT: PRESSURE CALCULATOR & HOLOGRAPHIC PASS -->' +
       '<div class="grid g2" style="margin-top:24px">' +
 
         '<!-- REAL-TIME COLD PRESSURE CALCULATOR -->' +
-        '<div class="box" style="display:flex;flex-direction:column;justify-content:space-between">' +
-          '<div>' +
-            '<div style="display:flex;justify-content:space-between;align-items:center">' +
-              '<h3 style="margin:0">⚡ Cold Tyre Pressure Telemetry</h3>' +
-              '<span class="tag sm cyan">Live Calibration</span>' +
-            '</div>' +
-            '<p style="color:var(--mute);font-size:0.88rem;margin:6px 0 12px">Select your current ride mode to calculate optimal tyre inflation:</p>' +
+        '<div class="pressure-calculator-box">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center">' +
+            '<h3 style="margin:0;color:var(--cyan)">⚡ Cold Pressure Telemetry</h3>' +
+            '<span class="tag sm cyan">Live Calibration</span>' +
+          '</div>' +
+          '<p style="color:var(--mute);font-size:0.88rem;margin:6px 0 12px">Select your ride mode to calculate optimal tyre inflation:</p>' +
 
-            '<div class="pressure-modes-bar">' +
-              '<button type="button" class="pressure-mode-btn ' + (S_RIDER.pressureMode === "solo" ? "active" : "") + '" onclick="setRiderPressureMode(\'solo\')">🏍️ Solo City</button>' +
-              '<button type="button" class="pressure-mode-btn ' + (S_RIDER.pressureMode === "pillion" ? "active" : "") + '" onclick="setRiderPressureMode(\'pillion\')">👥 With Pillion</button>' +
-              '<button type="button" class="pressure-mode-btn ' + (S_RIDER.pressureMode === "monsoon" ? "active" : "") + '" onclick="setRiderPressureMode(\'monsoon\')">🌧️ Monsoon Rain</button>' +
-              '<button type="button" class="pressure-mode-btn ' + (S_RIDER.pressureMode === "touring" ? "active" : "") + '" onclick="setRiderPressureMode(\'touring\')">🛣️ Highway Tour</button>' +
-            '</div>' +
+          '<div class="pressure-modes-bar">' +
+            '<button type="button" class="pressure-mode-btn ' + (S_RIDER.pressureMode === "solo" ? "active" : "") + '" onclick="setRiderPressureMode(\'solo\')">🏍️ Solo City</button>' +
+            '<button type="button" class="pressure-mode-btn ' + (S_RIDER.pressureMode === "pillion" ? "active" : "") + '" onclick="setRiderPressureMode(\'pillion\')">👥 With Pillion</button>' +
+            '<button type="button" class="pressure-mode-btn ' + (S_RIDER.pressureMode === "monsoon" ? "active" : "") + '" onclick="setRiderPressureMode(\'monsoon\')">🌧️ Monsoon Rain</button>' +
+            '<button type="button" class="pressure-mode-btn ' + (S_RIDER.pressureMode === "touring" ? "active" : "") + '" onclick="setRiderPressureMode(\'touring\')">🛣️ Highway Tour</button>' +
+          '</div>' +
 
-            '<div class="gauges-display-grid">' +
-              '<div class="digital-gauge-box">' +
-                '<div class="digital-gauge-label">Target Front Pressure</div>' +
-                '<div class="digital-gauge-value">' + calcFrontPsi + '<span style="font-size:1.1rem"> PSI</span></div>' +
-                '<small style="color:var(--mute)">' + (bikeMeta.frontSize || "Front Wheel") + '</small>' +
-              '</div>' +
-              '<div class="digital-gauge-box">' +
-                '<div class="digital-gauge-label">Target Rear Pressure</div>' +
-                '<div class="digital-gauge-value amber">' + calcRearPsi + '<span style="font-size:1.1rem"> PSI</span></div>' +
-                '<small style="color:var(--mute)">' + (bikeMeta.rearSize || "Rear Wheel") + '</small>' +
-              '</div>' +
+          '<div class="gauges-display-grid">' +
+            '<div class="digital-gauge-box">' +
+              '<div class="digital-gauge-label">Target Front Wheel</div>' +
+              '<div class="digital-gauge-value">' + calcFrontPsi + '<span style="font-size:1.1rem"> PSI</span></div>' +
+              '<small style="color:var(--mute)">' + (bikeMeta.frontSize || "Front Wheel") + '</small>' +
             '</div>' +
-
-            '<div class="callout" style="margin-top:16px;font-size:0.86rem">' +
-              '<span>💡</span> <div><strong>Mode Dynamics:</strong> ' + modeAdvice + '</div>' +
+            '<div class="digital-gauge-box rear">' +
+              '<div class="digital-gauge-label">Target Rear Wheel</div>' +
+              '<div class="digital-gauge-value">' + calcRearPsi + '<span style="font-size:1.1rem"> PSI</span></div>' +
+              '<small style="color:var(--mute)">' + (bikeMeta.rearSize || "Rear Wheel") + '</small>' +
             '</div>' +
           '</div>' +
 
-          '<button class="btn sm ghost" style="margin-top:14px;width:100%" onclick="toast(\'Logged ' + calcFrontPsi + '/' + calcRearPsi + ' PSI check to your digital service history\')">✓ Log Current Tyre Pressure Check (+15 pts)</button>' +
+          '<div class="callout" style="margin-top:16px;font-size:0.86rem;background:rgba(0,229,255,0.06);border-color:rgba(0,229,255,0.2)">' +
+            '<span>💡</span> <div><strong>Mode Dynamics:</strong> ' + modeAdvice + '</div>' +
+          '</div>' +
+
+          '<button class="btn sm ghost" style="margin-top:14px;width:100%" onclick="toast(\'Logged \' + calcFrontPsi + \'/\' + calcRearPsi + \' PSI check! +15 loyalty points added to wallet\')">✓ Log Current Tyre Pressure Check (+15 pts)</button>' +
         '</div>' +
 
         '<!-- HOLOGRAPHIC DIGITAL WARRANTY PASS -->' +
-        '<div class="hologram-warranty-pass" style="display:flex;flex-direction:column;justify-content:space-between">' +
+        '<div class="hologram-warranty-pass">' +
           '<div class="hologram-seal">5-YR<br>GENUINE</div>' +
           '<div>' +
-            '<span class="tag sm" style="font-size:0.75rem">Eurogrip Official Security Shield</span>' +
+            '<span class="tag sm" style="font-size:0.75rem;background:rgba(255,179,0,0.15);color:var(--amber);border-color:rgba(255,179,0,0.3)">Eurogrip Official Security Shield</span>' +
             '<h3 style="font-size:1.55rem;margin:8px 0 2px;color:#FFF">Digital Tyre Ownership Certificate</h3>' +
             '<p style="color:var(--amber);font-weight:700;margin:0 0 12px;font-size:0.9rem">Serial ID: ' + tyre.id + '</p>' +
 
-            '<div style="background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;margin-bottom:14px">' +
+            '<div style="background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;margin-bottom:14px">' +
               '<div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:6px">' +
                 '<span style="color:var(--mute)">Registered Owner:</span><strong>' + esc(user.name) + '</strong>' +
               '</div>' +
@@ -246,12 +233,12 @@ function renderUserPortal(container, user) {
                 '<span style="color:var(--mute)">Motorcycle:</span><strong>' + esc(userBike) + '</strong>' +
               '</div>' +
               '<div style="display:flex;justify-content:space-between;font-size:0.85rem">' +
-                '<span style="color:var(--mute)">Warranty Status:</span><strong style="color:var(--success)">5-Year Official Active</strong>' +
+                '<span style="color:var(--mute)">Warranty Coverage:</span><strong style="color:var(--success)">5-Year Official Active</strong>' +
               '</div>' +
             '</div>' +
 
             '<div style="font-size:0.82rem;color:var(--mute)">' +
-              'Tread Life Estimate: <strong>' + (tyre.lifeEstimate || "32,000 km") + '</strong> · Anti-Counterfeit Tag: <strong>Verified Authentic</strong>' +
+              'Anti-Counterfeit Tag: <strong style="color:var(--success)">Verified Authentic</strong> · Bead Laser ID: <strong>AIS-140 OK</strong>' +
             '</div>' +
           '</div>' +
 
@@ -263,11 +250,11 @@ function renderUserPortal(container, user) {
 
       '</div>' +
 
-      '<!-- APPOINTMENT BOOKING WITH NEARBY CERTIFIED GARAGES -->' +
-      '<div class="box" style="margin-top:24px">' +
+      '<!-- 3. APPOINTMENT BOOKING WITH NEARBY CERTIFIED GARAGES -->' +
+      '<div class="box" style="margin-top:24px;background:#0C121D;border:1px solid rgba(0,229,255,0.2)">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px">' +
           '<div>' +
-            '<h3 style="margin:0">📍 Book Verified Inspection at Partner Garages</h3>' +
+            '<h3 style="margin:0;color:var(--cyan)">📍 Book Verified Inspection at Partner Garages</h3>' +
             '<p style="margin:0;color:var(--mute);font-size:0.88rem">Authorized mechanics near ' + esc(user.city || "Bengaluru") + ' offering free nitrogen checkups for Eurogrip riders.</p>' +
           '</div>' +
           '<span class="tag sm cyan">Complimentary Inspection Included</span>' +
@@ -275,22 +262,22 @@ function renderUserPortal(container, user) {
 
         '<div class="grid g3">' +
           ((typeof PARTNER_GARAGES_DB !== "undefined" ? PARTNER_GARAGES_DB.slice(0, 3) : []).map(function(g) {
-            return '<div class="garage-select-item ' + (S_RIDER.selectedGarageId === g.id ? "selected" : "") + '" onclick="selectRiderGarage(\'' + g.id + '\')">' +
+            return '<div class="garage-select-item ' + (S_RIDER.selectedGarageId === g.id ? "selected" : "") + '" onclick="selectRiderGarage(\'\' + g.id + \'\')">' +
               '<div>' +
                 '<strong>' + esc(g.name) + '</strong><br>' +
                 '<small style="color:var(--mute)">' + esc(g.area) + ' · ⭐ ' + g.rating + '</small>' +
               '</div>' +
-              '<button class="btn sm ghost" style="padding:4px 8px;font-size:0.75rem" onclick="event.stopPropagation(); bookGarageAppointment(\'' + g.name + '\')">Book</button>' +
+              '<button class="btn sm ghost" style="padding:4px 8px;font-size:0.75rem" onclick="event.stopPropagation(); bookGarageAppointment(\'\' + g.name + \'\')">Book Free Slot</button>' +
             '</div>';
           }).join("")) +
         '</div>' +
       '</div>' +
 
-      '<!-- RIDER REWARDS GEAR UNLOCK PROGRESS -->' +
-      '<div class="box" style="margin-top:24px">' +
+      '<!-- 4. RIDER REWARDS GEAR VAULT & REFERRAL ENGINE -->' +
+      '<div class="box" style="margin-top:24px;background:#0C121D;border:1px solid rgba(255,179,0,0.2)">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">' +
           '<div>' +
-            '<h3 style="margin:0">🎁 Rider Rewards Vault</h3>' +
+            '<h3 style="margin:0;color:var(--amber)">🎁 Rider Rewards Vault</h3>' +
             '<small style="color:var(--mute)">Earn redeemable points for routine tyre inspections, reviews & referrals.</small>' +
           '</div>' +
           '<div style="text-align:right">' +
@@ -307,19 +294,35 @@ function renderUserPortal(container, user) {
           '</div>' +
         '</div>' +
         '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">' +
-          '<button class="btn sm ghost" onclick="document.querySelector(\'[data-t=\\\'rew\\\']\').click(); location.href=\'#solution\';">View All 4 Reward Tiers →</button>' +
+          '<button class="btn sm ghost" onclick="document.querySelector(\'[data-t=\\\\\'rew\\\\\']\').click(); location.href=\'#solution\';">View All 4 Reward Tiers →</button>' +
           '<button class="btn sm ghost" onclick="toast(\'Referral link copied! Share with fellow riders to earn +150 pts\')">👥 Refer a Rider Friend (+150 pts)</button>' +
+        '</div>' +
+      '</div>' +
+
+      '<!-- 5. 24x7 EMERGENCY ROADSIDE TYRE ASSISTANCE (RSA) -->' +
+      '<div class="rsa-emergency-card" style="margin-top:24px">' +
+        '<div>' +
+          '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">' +
+            '<span class="tag sm rose" style="background:rgba(239,68,68,0.2);color:#EF4444;border-color:rgba(239,68,68,0.4)">🆘 24x7 Roadside Assistance</span>' +
+            '<span style="font-size:0.8rem;color:var(--mute)">Free for Eurogrip Registered Riders</span>' +
+          '</div>' +
+          '<h3 style="margin:2px 0;font-size:1.3rem;color:#FFF">Puncture or Bead Leak on Highway?</h3>' +
+          '<p style="margin:0;font-size:0.85rem;color:var(--mute)">Call verified national emergency helpline for mobile nitrogen and tyre patching dispatch.</p>' +
+        '</div>' +
+        '<div style="display:flex;gap:10px">' +
+          '<button class="btn sm" style="background:#EF4444;color:#FFF;box-shadow:0 4px 18px rgba(239,68,68,0.4)" onclick="toast(\'Dialing 24x7 Eurogrip RSA: 1800-425-3876. Stand by for SMS tracking link.\')">📞 Call 1800-425-3876</button>' +
+          '<button class="btn sm ghost" onclick="toast(\'GPS SOS ping transmitted to 3 nearest certified garages\')">📍 Transmit GPS SOS</button>' +
         '</div>' +
       '</div>' +
 
     '</div>';
 
-  if (!isMobileDevice() && S_RIDER.forceMobileSimulator) {
+  if (S_RIDER.viewMode === "simulator") {
     container.innerHTML =
       '<div class="desktop-phone-simulator-wrap">' +
         '<div class="simulator-control-bar">' +
           '<span>📱 <strong>Smartphone Simulation Mode</strong> (Active)</span>' +
-          '<button class="btn sm ghost" style="padding:4px 8px;font-size:0.75rem" onclick="toggleMobileSimulator(false)">✕ Exit Simulator</button>' +
+          '<button class="btn sm ghost" style="padding:4px 8px;font-size:0.75rem" onclick="setRiderViewMode(\'cockpit\')">✕ Exit to Wide View</button>' +
         '</div>' +
         '<div class="desktop-phone-frame">' +
           '<div class="phone-frame-notch-bar">' +
@@ -385,5 +388,5 @@ function changeRiderBike(newBike) {
 
 function bookGarageAppointment(shopName) {
   var u = S.currentUser;
-  toast("Appointment confirmed at " + shopName + " for " + (u ? u.name : "Rider") + "! SMS alert sent.");
+  toast("Appointment confirmed at " + shopName + " for " + (u ? u.name : "Rider") + "! SMS alert sent with free nitrogen checkup voucher.");
 }
