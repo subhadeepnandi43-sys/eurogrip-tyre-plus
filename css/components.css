@@ -984,9 +984,33 @@ footer {
   .hero-grid, .demo, .problem-split, .loopwrap { grid-template-columns: 1fr; }
   .hero-visual-img { height: 320px; }
   .hero-stats-bar { grid-template-columns: 1fr 1fr; }
-  section { padding: 60px 0; }
+  section { padding: 48px 0; }
 }
 @media (max-width: 600px) {
   nav .nav-links { display: none; }
   .hero-stats-bar { grid-template-columns: 1fr; }
+  .wrap { padding: 0 16px; }
+  section { padding: 36px 0; }
+  .box, .tyre-dossier-card, .rider-machine-hero, .hologram-warranty-pass, .pressure-calculator-box {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+  .spec-badges-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .spec-badge-item {
+    padding: 10px 12px;
+  }
+  .spec-badge-val {
+    font-size: 1.05rem;
+  }
+  .tread-dial-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  .digital-gauge-value {
+    font-size: 2.6rem;
+  }
 }

@@ -2,7 +2,11 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+  <meta name="theme-color" content="#0C1014">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Eurogrip TYRE+">
   <title>Eurogrip TYRE+ | Your Tyre. Your Ride. Your Trusted Mechanic.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -648,6 +652,7 @@
   <!-- PASSPORT MODAL (TRIGGERED BY REAL PHONE SCAN OR PREVIEW BUTTON) -->
   <div class="passport-modal-overlay" id="passportModal" onclick="if(event.target===this)closePassportModal()">
     <div class="passport-card">
+      <div class="bottom-sheet-drag-pill" aria-hidden="true"></div>
       <button class="passport-close" onclick="closePassportModal()" aria-label="Close modal">✕</button>
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
         <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--amber),#FF6B00);display:grid;place-items:center;font-weight:900;color:#000;font-size:1.3rem">E</div>
@@ -696,6 +701,7 @@
   <!-- AUTHENTICATION MODAL (ADMIN & USER LOGIN DATABASE) -->
   <div class="auth-modal-overlay" id="authModal" onclick="if(event.target===this)closeAuthModal()">
     <div class="auth-card">
+      <div class="bottom-sheet-drag-pill" aria-hidden="true"></div>
       <button class="passport-close" onclick="closeAuthModal()" aria-label="Close modal">✕</button>
       
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
@@ -833,6 +839,30 @@
 
     </div>
   </div>
+
+  <!-- MOBILE FLOATING ACTION DOCK (NATIVE PWA EXPERIENCE) -->
+  <aside class="mobile-bottom-dock" aria-label="Mobile quick actions">
+    <button class="dock-item" onclick="document.querySelector('[data-t=\'qr\']').click(); location.href='#solution';" title="Scan Tyre QR">
+      <span class="dock-icon">📷</span>
+      <span class="dock-label">Scan QR</span>
+    </button>
+    <button class="dock-item" onclick="location.href='#portal';" title="Motorcycle Cockpit">
+      <span class="dock-icon">🏍️</span>
+      <span class="dock-label">Garage</span>
+    </button>
+    <button class="dock-item" onclick="if(typeof setRiderPressureMode==='function'){setRiderPressureMode('solo');} location.href='#portal';" title="Live Cold Pressure">
+      <span class="dock-icon">⚡</span>
+      <span class="dock-label">PSI Gauge</span>
+    </button>
+    <button class="dock-item" onclick="openPassportModal();" title="Digital Passport">
+      <span class="dock-icon">🛡️</span>
+      <span class="dock-label">Warranty</span>
+    </button>
+    <button class="dock-item rsa" onclick="toast('Dialing 24x7 Eurogrip RSA: 1800-425-3876...');" title="Emergency Roadside Help">
+      <span class="dock-icon">🆘</span>
+      <span class="dock-label">SOS Help</span>
+    </button>
+  </aside>
 
   <!-- MODULAR SCRIPTS -->
   <script src="js/data.js"></script>
