@@ -235,6 +235,9 @@ function logoutUser() {
   renderNavbarAuth();
   renderPortalDashboard();
   toast("You have logged out.");
+  setTimeout(function() {
+    openAuthModal("user");
+  }, 350);
 }
 
 function renderNavbarAuth() {
@@ -267,6 +270,13 @@ function initAuthAndPortals() {
   S.currentUser = getSessionUser();
   renderNavbarAuth();
   renderPortalDashboard();
+
+  // Automatically pop up login modal on first load if not signed in
+  if (!S.currentUser) {
+    setTimeout(function() {
+      openAuthModal("user");
+    }, 280);
+  }
 
   // Auth Modal Role Tabs Listener
   var tabsContainer = document.querySelector(".auth-role-tabs");
