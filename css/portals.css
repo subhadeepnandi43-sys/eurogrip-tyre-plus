@@ -211,16 +211,22 @@
    1. ADMIN CONSOLE: INDUSTRIAL COMMAND DECK STYLING
    ============================================================================= */
 .admin-console-wrap {
-  background: #090D14;
-  background-image: 
-    radial-gradient(rgba(255, 179, 0, 0.06) 1px, transparent 0),
-    linear-gradient(180deg, rgba(14, 20, 29, 0.95) 0%, rgba(9, 13, 20, 0.98) 100%);
-  background-size: 24px 24px, 100% 100%;
+  background: #0E131A;
   border: 1px solid rgba(255, 179, 0, 0.35);
   border-radius: var(--radius-lg);
   padding: 28px;
-  box-shadow: 0 25px 75px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 75px rgba(0, 0, 0, 0.85);
   position: relative;
+}
+.admin-console-wrap.simple-admin {
+  background: #0B1017;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.admin-console-wrap.simple-admin:before {
+  display: none;
 }
 .admin-console-wrap:before {
   content: "";
@@ -424,333 +430,437 @@
 }
 
 /* =============================================================================
-   2. RIDER VIRTUAL COCKPIT: HIGH-OCTANE AUTOMOTIVE COMPANION
+   2. EASY RIDER PORTAL: SIMPLE, INTUITIVE MOTORCYCLE COMPANION
    ============================================================================= */
-.rider-garage-wrap {
-  background: radial-gradient(circle at 85% 15%, rgba(0, 229, 255, 0.12) 0%, rgba(13, 19, 32, 0.98) 60%),
-              linear-gradient(135deg, #090E1A 0%, #060911 100%);
-  border: 1px solid rgba(0, 229, 255, 0.35);
-  border-radius: var(--radius-lg);
-  padding: 30px;
-  box-shadow: 0 25px 75px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 229, 255, 0.12);
-  position: relative;
+.easy-rider-wrap {
+  max-width: 900px;
+  margin: 0 auto;
 }
-.rider-garage-wrap:before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #00E5FF 0%, #0088FF 50%, #FFB300 100%);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-.rider-top-bar {
+
+/* Friendly Top Card */
+.rider-header-card {
+  background: #111722;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 229, 255, 0.15);
 }
-.rider-view-mode-bar {
+.rider-welcome-pill {
+  font-size: 0.8rem;
+  color: var(--cyan);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.rider-greeting-title {
+  margin: 0;
+  font-size: 2rem;
+  color: #FFF;
+  font-weight: 800;
+}
+.rider-contact-meta {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-full);
-  padding: 3px 6px;
-}
-.rider-view-mode-btn {
-  background: transparent;
-  border: none;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
   color: var(--mute);
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  margin-top: 6px;
 }
-.rider-view-mode-btn.active {
-  background: rgba(0, 229, 255, 0.2);
+.rider-contact-meta strong {
+  color: #FFF;
+}
+.meta-dot {
+  color: rgba(255, 255, 255, 0.2);
+}
+.rider-shield-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.rider-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Reusable Step Sections */
+.rider-section-card {
+  background: #111722;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+.rider-card-header {
+  margin-bottom: 18px;
+}
+.step-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--mute);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.step-badge.cyan {
+  background: rgba(0, 229, 255, 0.15);
   color: var(--cyan);
 }
-.rider-role-switch-btn {
-  background: rgba(255, 179, 0, 0.12);
-  border: 1px solid rgba(255, 179, 0, 0.35);
+.step-badge.amber {
+  background: rgba(255, 179, 0, 0.15);
   color: var(--amber);
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
-  font-size: 0.82rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
-.rider-role-switch-btn:hover {
-  background: rgba(255, 179, 0, 0.25);
-  transform: translateY(-1px);
+.rider-card-title {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #FFF;
+  font-weight: 700;
+}
+.rider-card-subtitle {
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  color: var(--mute);
 }
 
-/* Machine Hero Card */
-.rider-machine-hero {
-  background: linear-gradient(135deg, rgba(16, 25, 42, 0.95) 0%, rgba(10, 15, 26, 0.98) 100%);
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+/* Step 1: Bike Selector */
+.bike-selector-box {
+  margin-bottom: 18px;
 }
-.machine-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 16px;
+.easy-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--mute);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.easy-select {
+  width: 100%;
+  padding: 12px 14px;
+  background: #090E16;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  color: #FFF;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+}
+.easy-select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+}
+.bike-summary-badges {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 768px) {
+  .bike-summary-badges { grid-template-columns: 1fr 1fr; }
+}
+.bike-badge-item {
+  background: #090E16;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.badge-lbl {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--mute);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.badge-val {
+  font-size: 0.92rem;
+  color: #FFF;
+}
+.badge-val.cyan { color: var(--cyan); }
+.badge-val.amber { color: var(--amber); }
+
+/* Step 2: Air Pressure Buttons & Gauges */
+.easy-mode-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   margin-bottom: 20px;
 }
-.machine-name-title {
-  font-size: 2.1rem;
-  font-family: "Barlow Condensed", sans-serif;
-  font-weight: 800;
-  color: #FFF;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  letter-spacing: 0.02em;
+@media (max-width: 640px) {
+  .easy-mode-buttons { grid-template-columns: 1fr 1fr; }
 }
-
-/* Radial Tread Life & Health Dial */
-.tread-dial-container {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
-  margin-top: 18px;
-}
-.tread-dial-svg-box {
-  width: 76px;
-  height: 76px;
-  position: relative;
-  flex-shrink: 0;
-}
-.tread-dial-text {
-  position: absolute;
-  inset: 0;
+.easy-mode-btn {
+  background: #090E16;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 0.88rem;
-  font-weight: 800;
-  color: var(--success);
-}
-
-/* Interactive Cold Pressure Calculator */
-.pressure-calculator-box {
-  background: rgba(10, 15, 24, 0.85);
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  border-radius: var(--radius-md);
-  padding: 22px;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-.pressure-modes-bar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin: 14px 0 18px;
-}
-@media (max-width: 640px) {
-  .pressure-modes-bar { grid-template-columns: 1fr 1fr; }
-}
-.pressure-mode-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--mute);
-  padding: 10px 8px;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
-  font-size: 0.82rem;
+  gap: 6px;
   cursor: pointer;
+  color: var(--mute);
   transition: all 0.2s ease;
-  text-align: center;
   font-family: inherit;
 }
-.pressure-mode-btn:hover {
-  color: var(--ink);
+.easy-mode-btn:hover {
   border-color: var(--cyan);
+  color: #FFF;
 }
-.pressure-mode-btn.active {
-  background: rgba(0, 229, 255, 0.18);
-  color: var(--cyan);
+.easy-mode-btn.active {
+  background: rgba(0, 229, 255, 0.12);
   border-color: var(--cyan);
-  box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
+  color: #FFF;
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.2);
 }
-.gauges-display-grid {
+.mode-icon {
+  font-size: 1.4rem;
+}
+.mode-text {
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+.easy-gauges-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 480px) {
+  .easy-gauges-row { grid-template-columns: 1fr; }
+}
+.easy-gauge {
+  background: #090E16;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+.easy-gauge.front {
+  border: 1px solid rgba(0, 229, 255, 0.35);
+}
+.easy-gauge.rear {
+  border: 1px solid rgba(255, 179, 0, 0.35);
+}
+.gauge-title {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mute);
+}
+.gauge-number {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 3.4rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 6px 0;
+}
+.easy-gauge.front .gauge-number { color: var(--cyan); }
+.easy-gauge.rear .gauge-number { color: var(--amber); }
+.gauge-unit {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.gauge-hint {
+  font-size: 0.8rem;
+  color: var(--mute);
+}
+.easy-advice-box {
+  background: rgba(0, 229, 255, 0.06);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.86rem;
+  color: #D1D5DB;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.easy-check-btn {
+  width: 100%;
+  padding: 12px;
+  background: #090E16;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: var(--success);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.easy-check-btn:hover {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+/* Step 3: 5-Year Warranty Card */
+.warranty-card-body {
+  background: #090E16;
+  border: 1px solid rgba(255, 179, 0, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+}
+.warranty-badge-active {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.warranty-details-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
+  margin-bottom: 18px;
 }
-.digital-gauge-box {
-  background: radial-gradient(circle at center, rgba(0, 229, 255, 0.1) 0%, rgba(13, 19, 28, 0.95) 75%);
-  border: 1px solid rgba(0, 229, 255, 0.35);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+@media (max-width: 600px) {
+  .warranty-details-grid { grid-template-columns: 1fr; }
 }
-.digital-gauge-box.rear {
-  background: radial-gradient(circle at center, rgba(255, 179, 0, 0.1) 0%, rgba(13, 19, 28, 0.95) 75%);
-  border-color: rgba(255, 179, 0, 0.35);
+.warranty-detail-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
 }
-.digital-gauge-label {
-  font-size: 0.76rem;
-  text-transform: uppercase;
+.item-label {
+  display: block;
+  font-size: 0.75rem;
   color: var(--mute);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
-.digital-gauge-value {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 3.2rem;
-  font-weight: 900;
-  color: var(--cyan);
-  line-height: 1;
-  margin: 6px 0;
-  text-shadow: 0 0 18px rgba(0, 229, 255, 0.45);
+.item-value {
+  font-size: 0.92rem;
+  color: #FFF;
 }
-.digital-gauge-box.rear .digital-gauge-value {
-  color: var(--amber);
-  text-shadow: 0 0 18px rgba(255, 179, 0, 0.45);
-}
-
-/* Hologram Warranty Pass */
-.hologram-warranty-pass {
-  background: linear-gradient(135deg, rgba(20, 28, 42, 0.95) 0%, rgba(10, 14, 22, 0.98) 100%);
-  border: 1px solid rgba(255, 179, 0, 0.3);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
-}
-.hologram-seal {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #FFE082, #FFB300 60%, #E65100 100%);
+.item-value.amber { color: var(--amber); }
+.item-value.cyan { color: var(--cyan); }
+.item-value.success { color: var(--success); }
+.warranty-action-buttons {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-weight: 900;
-  font-size: 0.65rem;
-  line-height: 1;
-  box-shadow: 0 0 20px rgba(255, 179, 0, 0.5);
-  user-select: none;
-}
-.garage-select-item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.garage-select-item:hover,
-.garage-select-item.selected {
-  background: rgba(0, 229, 255, 0.08);
-  border-color: var(--cyan);
-}
-.rsa-emergency-card {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(20, 10, 10, 0.9) 100%);
-  border: 1px solid rgba(239, 68, 68, 0.35);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
+  gap: 10px;
   flex-wrap: wrap;
 }
+.warranty-action-buttons .btn {
+  flex: 1;
+  min-width: 160px;
+}
 
-/* SMARTPHONE FRAME SIMULATOR */
-.desktop-phone-simulator-wrap {
-  max-width: 440px;
-  margin: 0 auto;
-}
-.simulator-control-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #111720;
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  border-radius: var(--radius-sm);
-  padding: 10px 16px;
-  margin-bottom: 14px;
-  font-size: 0.82rem;
-}
-.desktop-phone-frame {
-  background: #090E16;
-  border: 12px solid #1C2432;
-  border-radius: 46px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 229, 255, 0.2);
-  overflow: hidden;
-  position: relative;
+/* Step 4: Garages List */
+.garages-list-grid {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
-.phone-frame-notch-bar {
-  background: #1C2432;
-  height: 28px;
+.easy-garage-card {
+  background: #090E16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  font-size: 0.72rem;
+  flex-wrap: wrap;
+  gap: 12px;
+  transition: border-color 0.2s ease;
+}
+.easy-garage-card:hover {
+  border-color: rgba(0, 229, 255, 0.3);
+}
+.garage-name {
+  font-size: 1rem;
+  color: #FFF;
+}
+.garage-meta {
+  font-size: 0.82rem;
+  color: var(--cyan);
+  margin-top: 2px;
+}
+.garage-mechanic {
+  font-size: 0.8rem;
+  color: var(--mute);
+  margin-top: 2px;
+}
+.garage-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Step 5: Roadside Assistance (SOS) */
+.rider-sos-card {
+  background: #180F12;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 14px;
+  padding: 22px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15);
+}
+.sos-tag {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+  font-size: 0.78rem;
+  font-weight: 800;
+  border-radius: 6px;
+  padding: 3px 8px;
+  margin-bottom: 6px;
+}
+.sos-title {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #FFF;
   font-weight: 700;
-  color: #CBD5E1;
-  user-select: none;
 }
-.phone-frame-island {
-  width: 80px;
-  height: 12px;
-  background: #000;
-  border-radius: 12px;
+.sos-desc {
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  color: var(--mute);
 }
-.phone-frame-screen-content {
-  max-height: 740px;
-  overflow-y: auto;
-  padding: 16px;
-  background: #0A0F1D;
+.sos-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
-.phone-frame-screen-content::-webkit-scrollbar { width: 4px; }
-.phone-frame-screen-content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
+.easy-sos-call-btn {
+  background: #EF4444;
+  color: #FFF;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
 }
-.phone-frame-home-pill {
-  width: 110px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  margin: 10px auto 6px;
+.easy-sos-call-btn:hover {
+  background: #DC2626;
+  color: #FFF;
+}
+.easy-sos-gps-btn {
+  color: #EF4444;
+  border-color: rgba(239, 68, 68, 0.4);
 }
 
 /* =============================================================================
