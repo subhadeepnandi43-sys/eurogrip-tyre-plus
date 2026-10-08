@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Eurogrip TYRE+ | Your Tyre. Your Ride. Your Trusted Mechanic.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/portals.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="wrap">
+      <a href="#" class="brand-group">
+        <div class="brand-badge">E</div>
+        <div class="brand-title">EUROGRIP <span>TYRE+</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="#showcase">Gallery</a>
+        <a href="#problem">The Problem</a>
+        <a href="#solution">Live Modules</a>
+        <a href="#portal" id="navPortalLink" style="display:none; color:var(--amber)">⚡ My Portal</a>
+        <a href="#loop">Trust Loop</a>
+        <a href="#build">Build Plan</a>
+        <a href="#why">Why It Wins</a>
+      </div>
+      <div class="nav-actions">
+        <div id="navAuthSlot" class="user-nav-status">
+          <button class="btn sm ghost" onclick="openAuthModal()" id="navLoginBtn">🔑 Sign In</button>
+        </div>
+        <button class="theme-btn" id="themeToggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">🌙</button>
+        <a class="btn sm" href="#solution">Try Prototype</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- HERO SECTION -->
+    <div class="wrap">
+      <header class="hero-section">
+        <div class="hero-grid">
+          <div class="hero-text">
+            <span class="tag">🚀 TORQ Innovation Concept</span>
+            <h1>Your Tyre. <span>Your Ride.</span> Your Trusted Mechanic.</h1>
+            <p class="lead">Eurogrip TYRE+ is an ultra-connected digital tyre-care ecosystem bridging riders, certified mechanics, and the Eurogrip brand. Transforming a one-off tyre transaction into lifelong rider loyalty and repeat purchases.</p>
+            <div class="hero-actions">
+              <a class="btn" href="#solution">⚡ Explore Interactive Demos</a>
+              <a class="btn ghost" href="#solution" onclick="document.querySelector('[data-t=\'qr\']').click(); openPassportModal();">📲 Mobile Passport</a>
+              <a class="btn ghost" href="#loop">🔄 View The Trust Loop</a>
+            </div>
+            <div class="hero-stats-bar">
+              <div class="hero-stat-item">
+                <h4>100%</h4>
+                <p>Direct Rider Link</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4>4,200+</h4>
+                <p>Mechanic Network</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4>3.2x</h4>
+                <p>Repeat Habit Rate</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual-card">
+            <img class="hero-visual-img" src="./images/hero-superbike.jpg" alt="Eurogrip high-performance motorcycle tyre carving corner on scenic mountain highway" loading="eager">
+            <div class="hero-visual-overlay"></div>
+            <div class="hero-floating-badge">
+              <div class="badge-left">
+                <div class="badge-icon">🏍️</div>
+                <div>
+                  <div class="badge-title">Pro Grip & High Precision</div>
+                  <div class="badge-desc">Every tyre serialized with Smart QR telemetry</div>
+                </div>
+              </div>
+              <span class="tag cyan">Active Link</span>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <!-- PHOTO SHOWCASE STRIP -->
+    <section id="showcase" class="photo-strip">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="tag">Visual Ecosystem</span>
+          <h2>Engineered for every ride. Backed by mechanics.</h2>
+          <p class="lead">From precision tread engineering to the trusted neighborhood garage, TYRE+ unites all key touchpoints into a seamless digital journey.</p>
+        </div>
+        <div class="strip-grid">
+          <div class="photo-card" onclick="document.querySelector('[data-t=\'qr\']').click(); location.href='#solution';">
+            <img class="photo-card-img" src="./images/smart-qr-scan.jpg" alt="Smart QR Sidewall Scan">
+            <div class="photo-card-body">
+              <span class="tag sm">Module A</span>
+              <h3>Smart QR Scan</h3>
+              <p>Instant phone camera tyre registration & fitment verification.</p>
+            </div>
+          </div>
+
+          <div class="photo-card" onclick="document.querySelector('[data-t=\'mech\']').click(); location.href='#solution';">
+            <img class="photo-card-img" src="./images/mechanic-service.jpg" alt="Eurogrip Certified Mechanic Hub">
+            <div class="photo-card-body">
+              <span class="tag sm">Module C</span>
+              <h3>Mechanic Connect</h3>
+              <p>Empowering local technicians with diagnostics & reward incentives.</p>
+            </div>
+          </div>
+
+          <div class="photo-card" onclick="document.querySelector('[data-t=\'rem\']').click(); location.href='#solution';">
+            <img class="photo-card-img" src="./images/tyre-showcase.jpg" alt="Eurogrip Tyre Tread Engineering">
+            <div class="photo-card-body">
+              <span class="tag sm">Module B</span>
+              <h3>Tyre Health Intelligence</h3>
+              <p>Distance & mileage telemetry with proactive service nudges.</p>
+            </div>
+          </div>
+
+          <div class="photo-card" onclick="document.querySelector('[data-t=\'rew\']').click(); location.href='#solution';">
+            <img class="photo-card-img" src="./images/rider-lifestyle.jpg" alt="Rider Community & Lifestyle">
+            <div class="photo-card-body">
+              <span class="tag sm">Module D</span>
+              <h3>Rider Rewards & Perks</h3>
+              <p>Gamified loyalty points for tyre checks, reviews & referrals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE PROBLEM SECTION -->
+    <section id="problem">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="tag">Market Reality</span>
+          <h2>Riders buy tyres on habit, not on proof</h2>
+          <p class="lead">Today most two-wheeler riders pick tyres based on price or whatever their local mechanic happens to have in stock. The mechanic holds decisive purchasing sway.</p>
+        </div>
+        
+        <div class="chips">
+          <span class="chip">💰 Surface price shopping</span>
+          <span class="chip">🔧 Decisive mechanic recommendation</span>
+          <span class="chip">🏷️ Passive brand familiarity</span>
+          <span class="chip">📦 Stock availability at counter</span>
+          <span class="chip">⚠️ Lack of post-purchase tyre health support</span>
+        </div>
+
+        <div class="problem-split">
+          <div class="problem-visual">
+            <img src="./images/tyre-showcase.jpg" alt="Eurogrip Studio Tyre Engineering">
+            <div class="problem-overlay">
+              <h3>Precision Engineering Meets Connected Intelligence</h3>
+              <p style="margin:0; font-size:0.9rem; color:#CBD5E1">Closing the information gap between manufacturer quality and rider awareness.</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="grid">
+              <div class="box">
+                <h3 style="color:var(--amber)">The Rider Challenge</h3>
+                <p>After the tyre is fitted, the brand goes silent. No check-in, no warranty registration, and zero incentive to return to Eurogrip when tread wears down 20,000 km later.</p>
+              </div>
+              <div class="box">
+                <h3 style="color:var(--cyan)">The Mechanic Bottleneck</h3>
+                <p>Independent mechanics influence over 70% of tyre purchase decisions, yet receive zero formal training, tier recognition, or incentive from Eurogrip.</p>
+              </div>
+            </div>
+            <div class="callout">
+              <span style="font-size:1.6rem">🎯</span>
+              <div>
+                <b>Our Breakthrough Solution:</b> Transform Eurogrip into the brand riders actively trust and mechanics enthusiastically champion.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTION SECTION -->
+    <section id="solution">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="tag">Interactive Prototypes</span>
+          <h2>Four modules, one connected platform</h2>
+          <p class="lead">Test every module live below. State & loyalty points sync seamlessly across the rider and mechanic interfaces.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Modules">
+          <button class="tab" role="tab" aria-selected="true" data-t="qr">📱 A. Smart Tyre QR</button>
+          <button class="tab" role="tab" aria-selected="false" data-t="rem">⏱️ B. Tyre Health Reminder</button>
+          <button class="tab" role="tab" aria-selected="false" data-t="mech">🔧 C. Mechanic Connect</button>
+          <button class="tab" role="tab" aria-selected="false" data-t="rew">🎁 D. Eurogrip Rewards</button>
+        </div>
+
+        <!-- TAB A: QR SCAN -->
+        <div id="p-qr">
+          <div class="demo">
+            <div class="demo-content-card">
+              <img class="demo-banner-img" src="./images/smart-qr-scan.jpg" alt="Smart Tyre QR Scanning Demonstration">
+              <h3>Serialized QR on Every Eurogrip Tyre</h3>
+              <p>Every tyre leaves the factory with a laser-bonded, high-durability QR code tag vulcanized onto the sidewall bead. No app store installation required—a lightweight PWA launches instantly.</p>
+              
+              <!-- TYRE SELECTOR PRESETS -->
+              <div class="scanner-presets-wrapper">
+                <div class="presets-title">
+                  <span>🎯 Quick Scan Presets (Test All Models):</span>
+                  <span style="font-size:0.75rem; color:var(--amber)">Click to scan</span>
+                </div>
+                <div class="preset-chips-list" id="presetChips">
+                  <button type="button" class="preset-chip active" data-tyre="EG-8841-27A-BLR">⚡ ProTorq Extreme (Radial)</button>
+                  <button type="button" class="preset-chip" data-tyre="EG-DUR-4421-DEL">🛡️ DuraPlus (Mileage 50k)</button>
+                  <button type="button" class="preset-chip" data-tyre="EG-BMR-3108-MUM">🌧️ Beamer Y+ (Urban Wet)</button>
+                  <button type="button" class="preset-chip" data-tyre="EG-TRB-7740-PUN">🏔️ Terrabite (Dual-Sport)</button>
+                  <button type="button" class="preset-chip" data-tyre="EG-CLM-5519-HYD">🚵 Climber XC (Off-Road)</button>
+                </div>
+              </div>
+
+              <!-- REAL SCANNABLE MOBILE CARD -->
+              <div class="real-qr-card">
+                <div class="real-qr-card-header">
+                  <div>
+                    <span class="tag" style="font-size:0.75rem; padding:3px 9px">📱 Universal Scanner</span>
+                    <h4 style="margin-top:4px; font-size:1.15rem; color:var(--amber)" id="scannerCardTitle">Active Tag: ProTorq Extreme</h4>
+                  </div>
+                  <span style="font-size:1.5rem">📲</span>
+                </div>
+                <div class="real-qr-layout">
+                  <div class="qr-frame">
+                    <img id="activeQrCodeImg" src="./images/eurogrip-qr-sample.png" alt="Eurogrip Scannable Tyre Passport QR Code">
+                    <div class="qr-scan-line"></div>
+                  </div>
+                  <div style="font-size:0.9rem; color:var(--ink-secondary)">
+                    <p style="margin:0 0 6px"><strong>Live Smartphone & Camera Detection:</strong></p>
+                    <ol style="margin:0; padding-left:18px; line-height:1.5">
+                      <li>Point phone camera at this matrix or use laptop webcam.</li>
+                      <li>Decoder identifies tyre compound, model & serial.</li>
+                      <li>Instantly loads cold pressure, fitment & digital passport.</li>
+                    </ol>
+                    <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap">
+                      <button class="btn sm" onclick="openPassportModal()">📱 View Passport Screen</button>
+                      <button class="btn sm ghost" onclick="startCameraScanner()">📷 Open Device Camera</button>
+                      <input type="file" id="qrFileInput" accept="image/*" style="display:none">
+                      <button class="btn sm ghost" onclick="document.getElementById('qrFileInput').click()">📁 Upload QR Photo</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ul class="tight">
+                <li><strong>Direct Tyre Profile:</strong> Tread pattern, compound specifications & fitment check.</li>
+                <li><strong>Instant 1-Click Warranty:</strong> Digital ownership card linked to chassis & phone.</li>
+                <li><strong>Real-time Cold Pressure Guidance:</strong> Tuned for city commuting or pillion touring.</li>
+                <li><strong>Anti-Counterfeit Shield:</strong> Verifies authentic Eurogrip factory serial numbers.</li>
+              </ul>
+              <div class="callout" style="margin-top:20px; font-size:0.95rem">
+                <span>💡</span> Or interact directly with the smartphone simulator on the right to test both automated scan and live camera detection!
+              </div>
+            </div>
+            
+            <div class="phone" id="phone" aria-live="polite">
+              <div class="phone-notch"></div>
+            </div>
+          </div>
+
+          <!-- FULL SCANNED TYRE SPECIFICATIONS DOSSIER -->
+          <div id="scannedTyreDossier"></div>
+        </div>
+
+        <!-- TAB B: REMINDER -->
+        <div id="p-rem" class="demo" hidden>
+          <div class="demo-content-card">
+            <img class="demo-banner-img" src="./images/hero-superbike.jpg" alt="Motorcycle Tyre Distance & Wear">
+            <h3>"It's time for your Eurogrip tyre check."</h3>
+            <p>Instead of disappearing post-purchase, the platform stays in touch with smart WhatsApp & SMS nudges based on ride mileage or elapsed calendar intervals.</p>
+            
+            <label for="km">Distance ridden since registration (km): <span id="kmVal" style="color:var(--amber); font-weight:700">1,800 km</span></label>
+            <input id="km" type="range" min="0" max="12000" step="100" value="1800">
+            
+            <label for="mo">Months since last inspection: <span id="moVal" style="color:var(--amber); font-weight:700">2 months</span></label>
+            <input id="mo" type="range" min="0" max="12" step="1" value="2">
+            
+            <p class="lead" style="font-size:0.92rem; margin-top:16px;">
+              <strong>Algorithmic Trigger:</strong> A complimentary tyre health check is scheduled every 3 months or 3,000 km.
+            </p>
+          </div>
+          <div class="phone" id="remphone">
+            <div class="phone-notch"></div>
+          </div>
+        </div>
+
+        <!-- TAB C: MECHANIC CONNECT -->
+        <div id="p-mech" hidden>
+          <div class="demo-content-card" style="margin-bottom:28px">
+            <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap:24px; align-items:center;">
+              <img style="width:100%; height:220px; object-fit:cover; border-radius:var(--radius-md); border:1px solid var(--panel-border)" src="./images/mechanic-service.jpg" alt="Mechanic Workshop Hub">
+              <div>
+                <span class="tag">Mechanic Partnership Portal</span>
+                <h3 style="margin-top:8px">Empowering Local Technicians</h3>
+                <p>Mechanics register customer fittings, record tyre health checks, take micro-learning quizzes, unlock tools, and build valuable workshop status.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid g2">
+            <div class="box">
+              <div class="pts">
+                <div>
+                  <span>Mechanic Points</span>
+                  <div class="big" id="mp">0</div>
+                </div>
+                <div>
+                  <span>Tier Status</span>
+                  <div class="big" id="ml" style="color:var(--cyan)">Bronze</div>
+                </div>
+              </div>
+              
+              <label for="cn">Customer Name</label>
+              <input id="cn" placeholder="e.g. Arjun Das">
+              
+              <label for="cb">Motorcycle Model</label>
+              <select id="cb">
+                <optgroup label="👑 Cruisers & Modern Classics">
+                  <option>Royal Enfield Classic 350</option>
+                  <option>Royal Enfield Hunter 350</option>
+                  <option>Royal Enfield Meteor 350</option>
+                  <option>Royal Enfield Bullet 350</option>
+                  <option>Honda H'ness CB350</option>
+                  <option>Jawa 42 / Classic</option>
+                </optgroup>
+                <optgroup label="⭐ Commuters & Daily Executives">
+                  <option>Hero Splendor+</option>
+                  <option>Hero HF Deluxe</option>
+                  <option>Hero Passion Pro</option>
+                  <option>Honda Shine 125</option>
+                  <option>Honda SP 125</option>
+                  <option>Bajaj Platina 110</option>
+                  <option>TVS Radeon</option>
+                </optgroup>
+                <optgroup label="⚡ Sports & Naked Performance">
+                  <option>Bajaj Pulsar 150</option>
+                  <option>Bajaj Pulsar NS200</option>
+                  <option>TVS Apache RTR 160 4V</option>
+                  <option>TVS Apache RR 310</option>
+                  <option>Yamaha R15 V4</option>
+                  <option>Yamaha MT-15 V2</option>
+                  <option>KTM 390 Duke</option>
+                  <option>Bajaj Dominar 400</option>
+                </optgroup>
+                <optgroup label="🏔️ Adventure & Dual-Sport Tourers">
+                  <option>Royal Enfield Himalayan 450</option>
+                  <option>Hero Xpulse 200 4V</option>
+                  <option>KTM 390 Adventure</option>
+                  <option>BMW G310 GS</option>
+                  <option>Suzuki V-Strom SX</option>
+                </optgroup>
+                <optgroup label="🛵 Scooters & Urban EVs">
+                  <option>Honda Activa 6G</option>
+                  <option>TVS Jupiter 125</option>
+                  <option>Suzuki Access 125</option>
+                  <option>Yamaha Aerox 155</option>
+                  <option>Ather 450X Gen 3</option>
+                  <option>Ola S1 Pro Gen 2</option>
+                </optgroup>
+              </select>
+              
+              <label for="ca">Service Action</label>
+              <select id="ca">
+                <option value="reg">Register customer (+20 pts)</option>
+                <option value="chk">Record tyre check (+30 pts)</option>
+                <option value="rec">Recommend Eurogrip product (+15 pts)</option>
+                <option value="trn">Complete training module (+50 pts)</option>
+              </select>
+              
+              <p style="margin-top:18px">
+                <button class="btn" id="mgo" style="width:100%">⚡ Record Entry & Award Points</button>
+              </p>
+              <small style="color:var(--mute); display:block; text-align:center">Duplicate fraud checks active.</small>
+            </div>
+
+            <div class="box">
+              <h3>Recent Workshop Activity</h3>
+              <div class="scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Action</th>
+                      <th class="r">Pts</th>
+                    </tr>
+                  </thead>
+                  <tbody id="mlog">
+                    <tr><td colspan="3" style="color:var(--mute)">No service entries yet. Submit an action on the left.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h4 style="margin-top:24px; color:var(--amber)">Tier Privileges & Rewards</h4>
+              <ul class="tight">
+                <li><strong>100 pts (Silver):</strong> Eurogrip workshop shop signage & branding pack</li>
+                <li><strong>300 pts (Gold):</strong> Precision digital tyre gauge & Official Certified Badge</li>
+                <li><strong>600 pts (Platinum):</strong> Annual dealer summit invitation & partner bonus pool</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">
+            <span>🤝</span>
+            <div>This transforms the mechanic from a passive vendor into an incentivized Eurogrip brand ambassador.</div>
+          </div>
+        </div>
+
+        <!-- TAB D: REWARDS -->
+        <div id="p-rew" hidden>
+          <div class="demo-content-card" style="margin-bottom:28px">
+            <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:24px; align-items:center;">
+              <div>
+                <span class="tag">Loyalty & Community</span>
+                <h3 style="margin-top:8px">Rider Actions → Points → Genuine Rewards</h3>
+                <p>Every tyre check completed, review written, and friend referred earns redeemable perks that foster long-term community attachment.</p>
+              </div>
+              <img style="width:100%; height:200px; object-fit:cover; border-radius:var(--radius-md); border:1px solid var(--panel-border)" src="./images/rider-lifestyle.jpg" alt="Rider rewards and road trips">
+            </div>
+          </div>
+
+          <div class="grid g2">
+            <div class="box">
+              <div class="pts">
+                <div>
+                  <span>Rider Points</span>
+                  <div class="big" id="rp">0</div>
+                </div>
+                <div>
+                  <span>Next Milestone</span>
+                  <div class="big" id="rn" style="font-size:1.8rem; padding-top:10px; color:var(--cyan)">100 pts</div>
+                </div>
+              </div>
+              
+              <h4 style="margin-bottom:12px">Earn Points Instantly:</h4>
+              <div class="scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Action</th>
+                      <th class="r">Points</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="rt"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Reward Catalogue</h3>
+              <p style="color:var(--mute); font-size:0.9rem">Unlock gear as your points accumulate across rides and checks.</p>
+              <div id="cat" style="margin-top:16px"></div>
+              <div class="callout" style="margin-top:20px; font-size:0.9rem">
+                <span>🎁</span> Points are verified across genuine inspections to ensure authentic rider loyalty.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLE-BASED PORTAL DASHBOARD (ADMIN & USER) -->
+    <section id="portal" class="portal-section" style="display:none">
+      <div class="wrap" id="portalContent">
+        <!-- Rendered dynamically by js/app.js based on role: admin vs user -->
+      </div>
+    </section>
+
+    <!-- TRUST LOOP SECTION -->
+    <section id="loop">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="tag">Strategic Moat</span>
+          <h2>The Eurogrip Trust Loop</h2>
+          <p class="lead">Not just a tyre app—a self-reinforcing flywheel connecting product, experience, mechanic loyalty, and repeat brand sales. Click any node below.</p>
+        </div>
+
+        <div class="loopwrap">
+          <div class="loop" id="loop-nodes"></div>
+          <div class="loop-detail-box" id="loop-info" aria-live="polite"></div>
+        </div>
+
+        <div class="callout" style="margin-top:36px">
+          <span>🔄</span>
+          <div><strong>The Compounding Advantage:</strong> As rider trust deepens and mechanics earn rewards, Eurogrip becomes the automatic first choice for every two-wheeler replacement.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUILD PLAN SECTION -->
+    <section id="build">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="tag">Implementation Roadmap</span>
+          <h2>How to build it: Proof to Scale</h2>
+          <p class="lead">A progressive 3-phase rollout blueprint minimizing risk and proving customer ROI from day one.</p>
+        </div>
+
+        <div class="grid g3">
+          <div class="box phase">
+            <span class="tag" style="margin-bottom:10px">Months 1–3</span>
+            <h3>Phase 1: Pilot & Validate</h3>
+            <ul class="tight">
+              <li>Frictionless QR PWA web app (zero app store barrier)</li>
+              <li>Personalized Rider & Tyre Profile passport</li>
+              <li>Lightweight Mechanic mobile dashboard</li>
+              <li>Pilot in 1 test metro with 25 certified garages</li>
+            </ul>
+          </div>
+
+          <div class="box phase">
+            <span class="tag cyan" style="margin-bottom:10px">Months 4–6</span>
+            <h3>Phase 2: Engage & Retain</h3>
+            <ul class="tight">
+              <li>Automated WhatsApp Business & SMS notifications</li>
+              <li>Gamified points engine & rewards catalogue</li>
+              <li>Mechanic product certification courses</li>
+              <li>Peer referral bonus loop</li>
+            </ul>
+          </div>
+
+          <div class="box phase">
+            <span class="tag" style="margin-bottom:10px">Months 7+</span>
+            <h3>Phase 3: Nationwide Scale</h3>
+            <ul class="tight">
+              <li>Full dealer ERP integration & stock data</li>
+              <li>Sales intelligence dashboard for Eurogrip leadership</li>
+              <li>Automated fraud detection on loyalty points</li>
+              <li>Multi-language support (Hindi, Tamil, Marathi, Bengali)</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin-top:48px; color:var(--ink)">Suggested Modern Tech Stack</h3>
+        <div class="grid g3" style="margin-top:16px">
+          <div class="box">
+            <h4 style="color:var(--amber)">⚡ Front End (PWA)</h4>
+            <p>Ultra-fast Next.js / React Progressive Web App. Instant launch from phone camera QR scan without app store installation friction.</p>
+          </div>
+          <div class="box">
+            <h4 style="color:var(--cyan)">🛡️ Secure Back End</h4>
+            <p>Node.js microservices, PostgreSQL with connection pooling, OTP authentication via phone number, and Redis for rate-limiting.</p>
+          </div>
+          <div class="box">
+            <h4 style="color:var(--success)">💬 Omnichannel Messaging</h4>
+            <p>Official WhatsApp Business Cloud API & transactional SMS webhooks for friendly, high-open-rate tyre service nudges.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:48px; color:var(--ink)">Core Relational Data Architecture</h3>
+        <div class="scroll box" style="margin-top:16px">
+          <table>
+            <thead>
+              <tr>
+                <th>Entity Table</th>
+                <th>Primary Attributes</th>
+                <th>Strategic Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>riders</strong></td><td>id, name, phone, city, created_at</td><td>Central rider identity profile</td></tr>
+              <tr><td><strong>bikes</strong></td><td>id, rider_id, make, model, year</td><td>Links tyre specifications to physical vehicle</td></tr>
+              <tr><td><strong>tyres</strong></td><td>qr_code, model, serial_no, bike_id, registered_at</td><td>Digital twin record for every manufactured tyre</td></tr>
+              <tr><td><strong>mechanics</strong></td><td>id, shop_name, city, tier_level, points</td><td>Certified partner garage network</td></tr>
+              <tr><td><strong>tyre_checks</strong></td><td>id, tyre_id, mechanic_id, odo_km, notes</td><td>Auditable vehicle service history log</td></tr>
+              <tr><td><strong>points_ledger</strong></td><td>id, user_id, action_type, points, verified</td><td>Immutable double-entry loyalty transaction ledger</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:48px; color:var(--ink)">Primary Key Performance Indicators</h3>
+        <div class="chips">
+          <span class="chip">🎯 QR Scan & Reg Rate (%)</span>
+          <span class="chip">📈 90-Day Tyre Check Retention</span>
+          <span class="chip">🔧 Active Mechanic Engagement Rate</span>
+          <span class="chip">🔄 Repeat Purchase Preference Uplift</span>
+          <span class="chip">⭐ NPS & Mechanic Recommendation Index</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY IT WINS SECTION -->
+    <section id="why">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="tag">TORQ Pitch Advantage</span>
+          <h2>Why this idea wins the challenge</h2>
+          <p class="lead">Most pitches address either the consumer brand image OR trade distribution in isolation. TYRE+ bridges both sides simultaneously.</p>
+        </div>
+
+        <div class="grid g3">
+          <div class="box">
+            <div style="font-size:2rem; margin-bottom:10px">🎯</div>
+            <h3>Reaches Both Decisive Audiences</h3>
+            <p>Riders receive genuine preventative care, safety advice, and tangible rewards. Mechanics gain digital tools, elevated status, and revenue incentives.</p>
+          </div>
+          <div class="box">
+            <div style="font-size:2rem; margin-bottom:10px">🔁</div>
+            <h3>Builds Repeat Behavioral Habits</h3>
+            <p>Instead of disappearing for 3 years between tyre replacements, timely micro-interactions keep Eurogrip top of mind all year round.</p>
+          </div>
+          <div class="box">
+            <div style="font-size:2rem; margin-bottom:10px">📊</div>
+            <h3>Generates Proprietary Market Intel</h3>
+            <p>Eurogrip captures granular data: who rides which bikes in what pin codes, average mileage, tread wear patterns, and top-performing mechanics.</p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:36px">
+          <span>🚀</span>
+          <div><strong>The Winning Formula:</strong> Superior Rubber + Connected Experience + Empowered Mechanic = Dominant Brand Loyalty.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap footer-wrap">
+      <div>
+        <div style="font-weight:700; color:var(--ink); font-size:1.1rem; margin-bottom:4px">Eurogrip TYRE+ Ecosystem</div>
+        <div>Designed for the TORQ Two-Wheeler Brand Preference Challenge.</div>
+      </div>
+      <div style="color:var(--mute); font-size:0.85rem">
+        All telemetry points, rewards & simulations are illustrative concept demonstrations.
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- PASSPORT MODAL (TRIGGERED BY REAL PHONE SCAN OR PREVIEW BUTTON) -->
+  <div class="passport-modal-overlay" id="passportModal" onclick="if(event.target===this)closePassportModal()">
+    <div class="passport-card">
+      <button class="passport-close" onclick="closePassportModal()" aria-label="Close modal">✕</button>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--amber),#FF6B00);display:grid;place-items:center;font-weight:900;color:#000;font-size:1.3rem">E</div>
+        <div>
+          <h3 style="font-size:1.4rem;line-height:1.1;color:#FFF">EUROGRIP TYRE+</h3>
+          <span style="font-size:0.8rem;color:var(--amber);font-weight:700">Official Digital Tyre Passport</span>
+        </div>
+      </div>
+      
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px;margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span class="tag sm" style="font-size:0.75rem">Serial Verified</span>
+          <span style="color:#10B981;font-weight:700;font-size:0.85rem">● 5-Yr Warranty Active</span>
+        </div>
+        <div style="font-size:1.45rem;font-weight:800;font-family:'Barlow Condensed',sans-serif;color:#FFF">Eurogrip ProTorq Extreme</div>
+        <div style="color:var(--mute);font-size:0.88rem">Fitment: 120/80-18 62P Radial Rear</div>
+        <div style="font-size:0.82rem;color:var(--amber);margin-top:4px">Serial ID: EG-8841-27A-BLR</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px">
+          <small style="color:var(--mute);display:block">Solo Pressure</small>
+          <strong style="color:#FFF;font-size:1.1rem">32 PSI</strong>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px">
+          <small style="color:var(--mute);display:block">Pillion Pressure</small>
+          <strong style="color:#FFF;font-size:1.1rem">36 PSI</strong>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px">
+          <small style="color:var(--mute);display:block">Estimated Tread</small>
+          <strong style="color:#10B981;font-size:1.1rem">98% Prime</strong>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px">
+          <small style="color:var(--mute);display:block">Next Check-In</small>
+          <strong style="color:var(--amber);font-size:1.1rem">In 90 Days</strong>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-direction:column">
+        <button class="btn" style="width:100%" onclick="savePassportWallet()">📲 Add to Apple / Google Wallet</button>
+        <button class="btn ghost" style="width:100%" onclick="closePassportModal(); document.querySelector('[data-t=\'rem\']').click(); location.href='#solution';">⏱️ Schedule Tyre Inspection</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTHENTICATION MODAL (ADMIN & USER LOGIN DATABASE) -->
+  <div class="auth-modal-overlay" id="authModal" onclick="if(event.target===this)closeAuthModal()">
+    <div class="auth-card">
+      <button class="passport-close" onclick="closeAuthModal()" aria-label="Close modal">✕</button>
+      
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--amber),#FF6B00);display:grid;place-items:center;font-weight:900;color:#000;font-size:1.25rem">E</div>
+        <div>
+          <h3 style="font-size:1.35rem;line-height:1.1;color:#FFF">EUROGRIP PORTAL</h3>
+          <span style="font-size:0.8rem;color:var(--amber);font-weight:700">Database Authentication System</span>
+        </div>
+      </div>
+
+      <!-- ROLE SELECTOR TABS -->
+      <div class="auth-role-tabs">
+        <button type="button" class="auth-role-tab active" data-auth-tab="user">👤 User Login</button>
+        <button type="button" class="auth-role-tab" data-auth-tab="admin">🛡️ Admin Console</button>
+        <button type="button" class="auth-role-tab" data-auth-tab="register">📝 Sign Up</button>
+      </div>
+
+      <!-- QUICK DEMO AUTOFILL BAR -->
+      <div class="auth-demo-bar">
+        <span>⚡ <strong>1-Click Demo Credentials:</strong></span>
+        <div style="display:flex;gap:6px">
+          <button type="button" class="quick-fill-btn" onclick="quickFillAccount('user')" title="Login as Rider Arjun via Phone Number">📱 Rider (9830012345)</button>
+          <button type="button" class="quick-fill-btn" onclick="quickFillAccount('admin')" title="Login as Admin HQ via Phone Number">🛡️ Admin (9840000001)</button>
+        </div>
+      </div>
+
+      <!-- DEVICE ADVISORY PILL -->
+      <div id="authDeviceNotice" style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--cyan);background:rgba(0,210,255,0.08);border:1px solid rgba(0,210,255,0.2);padding:6px 10px;border-radius:6px;margin-bottom:12px">
+        <span>📱</span> <span><strong>Mobile-Exclusive Access:</strong> Rider accounts are engineered for smartphones (desktop simulator available).</span>
+      </div>
+
+      <!-- LOGIN FORM (USER & ADMIN - SUPPORTS PHONE NUMBER, EMAIL, OR USERNAME) -->
+      <form id="authLoginForm" onsubmit="handleAuthSubmit(event)">
+        <label for="authEmail" style="margin-top:4px">Mobile Phone Number, Email, or Username</label>
+        <div class="phone-input-wrap">
+          <input type="text" id="authEmail" placeholder="e.g. 98300 12345 or rider@eurogrip.com" required autocomplete="username">
+        </div>
+        <small style="color:var(--mute);font-size:0.78rem;display:block;margin-top:4px">
+          💡 You can sign in using your 10-digit mobile number (e.g. 9830012345) or email
+        </small>
+
+        <label for="authPassword" style="margin-top:12px">Password</label>
+        <input type="password" id="authPassword" placeholder="••••••••" required autocomplete="current-password">
+
+        <div style="margin-top:20px;display:flex;gap:10px;flex-direction:column">
+          <button type="submit" class="btn" style="width:100%" id="authSubmitBtn">🔐 Sign In to Portal</button>
+          <button type="button" class="btn ghost" style="width:100%" onclick="switchToRegister()">New rider? Register with Phone Number →</button>
+        </div>
+      </form>
+
+      <!-- REGISTRATION FORM (MOBILE PHONE NUMBER PRIMARY REGISTRATION) -->
+      <form id="authRegisterForm" style="display:none" onsubmit="handleRegisterSubmit(event)">
+        <label for="regName" style="margin-top:4px">Full Name</label>
+        <input type="text" id="regName" placeholder="e.g. Arjun Sharma" required>
+
+        <div style="margin-top:10px">
+          <label for="regPhone">Mobile Phone Number <span style="color:var(--amber);font-weight:700">* (Primary Credential)</span></label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="background:var(--steel);padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--panel-border);font-weight:700;color:var(--amber);font-size:0.9rem">+91</span>
+            <input type="tel" id="regPhone" placeholder="98300 12345" required pattern="[0-9\s\-\+]{10,14}" style="flex:1" title="Please enter a valid 10-digit mobile number">
+          </div>
+          <small style="color:var(--mute);font-size:0.78rem;display:block;margin-top:4px">Used for tyre warranty verification, OTP alerts & instant login</small>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+          <div>
+            <label for="regEmail">Email Address <small style="color:var(--mute)">(Optional)</small></label>
+            <input type="email" id="regEmail" placeholder="rider@example.com">
+          </div>
+          <div>
+            <label for="regRole">Account Type</label>
+            <select id="regRole">
+              <option value="user">🏍️ Rider / Customer</option>
+              <option value="mechanic">🔧 Mechanic Partner</option>
+              <option value="admin">🛡️ Operations Admin</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="regBike" style="margin-top:10px">Select Your Motorcycle Variation</label>
+        <select id="regBike">
+          <optgroup label="👑 Cruisers & Modern Classics">
+            <option>Royal Enfield Classic 350</option>
+            <option>Royal Enfield Hunter 350</option>
+            <option>Royal Enfield Meteor 350</option>
+            <option>Royal Enfield Bullet 350</option>
+            <option>Honda H'ness CB350</option>
+            <option>Jawa 42 / Classic</option>
+          </optgroup>
+          <optgroup label="⭐ Commuters & Daily Executives">
+            <option>Hero Splendor+</option>
+            <option>Hero HF Deluxe</option>
+            <option>Hero Passion Pro</option>
+            <option>Honda Shine 125</option>
+            <option>Honda SP 125</option>
+            <option>Bajaj Platina 110</option>
+            <option>TVS Radeon</option>
+          </optgroup>
+          <optgroup label="⚡ Sports & Naked Performance">
+            <option>Bajaj Pulsar 150</option>
+            <option>Bajaj Pulsar NS200</option>
+            <option>TVS Apache RTR 160 4V</option>
+            <option>TVS Apache RR 310</option>
+            <option>Yamaha R15 V4</option>
+            <option>Yamaha MT-15 V2</option>
+            <option>KTM 390 Duke</option>
+            <option>Bajaj Dominar 400</option>
+          </optgroup>
+          <optgroup label="🏔️ Adventure & Dual-Sport Tourers">
+            <option>Royal Enfield Himalayan 450</option>
+            <option>Hero Xpulse 200 4V</option>
+            <option>KTM 390 Adventure</option>
+            <option>BMW G310 GS</option>
+            <option>Suzuki V-Strom SX</option>
+          </optgroup>
+          <optgroup label="🛵 Scooters & Urban EVs">
+            <option>Honda Activa 6G</option>
+            <option>TVS Jupiter 125</option>
+            <option>Suzuki Access 125</option>
+            <option>Yamaha Aerox 155</option>
+            <option>Ather 450X Gen 3</option>
+            <option>Ola S1 Pro Gen 2</option>
+          </optgroup>
+        </select>
+
+        <label for="regPassword" style="margin-top:10px">Create Password</label>
+        <input type="password" id="regPassword" placeholder="Min 6 characters" required minlength="6">
+
+        <div style="margin-top:20px;display:flex;gap:10px;flex-direction:column">
+          <button type="submit" class="btn" style="width:100%">⚡ Register with Phone & Save Account</button>
+          <button type="button" class="btn ghost" style="width:100%" onclick="switchToLogin()">← Already have account? Sign In</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- MODULAR SCRIPTS -->
+  <script src="js/data.js"></script>
+  <script src="js/scanner.js"></script>
+  <script src="js/modules.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/rider.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
